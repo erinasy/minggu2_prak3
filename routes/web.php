@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PSController;
 use App\Http\Controllers\NewsController;
+use App\Http\Controllers\SaranaController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\CommentController;
 /*
@@ -20,30 +22,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/', [HomeController::class.'index']);
-Route::prefix('prodi')->group(function(){
-    Route::get('/manajemen-informatika',function(){
-        return "Manajemen Informatika";
-    });
-    Route::get('/teknik-informatika',function(){
-        return "Teknik Informatika";
-    });
+
+Route::prefix('/prodi')->group(function(){
+    Route::get('/manajemen-informatika',[PSController::class.'mi']);
+    Route::get('/teknik-informatika',[PSController::class.'ti']);
 });
 
 Route::get('/news/{id}', [NewsController::class,'news']);
 
 Route::prefix('sarana')->group(function(){
-    Route::get('/perkantoran',function(){
-        return "Perkantoran";
-    });
-    Route::get('/labotarium',function(){
-        return "Labotarium";
-    });
-    Route::get('/kelas',function(){
-        return "Kelas";
-    });
-    Route::get('/lainnya',function(){
-        return "Lainnya";
-    });
+    Route::get('/perkantoran',[SaranaController::class.'kantor']);
+    Route::get('/laboratorium',[SaranaController::class.'lab']);
+    Route::get('/kelas',[SaranaController::class.'kelas']);
+    Route::get('/lainnya',[SaranaController::class.'lain']);
 });
 
 Route::get('/about', [AboutController::class.'about']);
