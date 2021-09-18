@@ -6,10 +6,11 @@ use Illuminate\Http\Request;
 
 class PSController extends Controller
 {
-    public function ti() {
-        return "Selamat Datang di Program Studi Teknik Informatika";
-    }
     public function mi() {
-        return "Selamat Datang di Program Studi Manajemen Informatika";
+        return view('prodi.mi');
+    }
+
+    public function ti() {
+        return view('prodi.ti');
     }
 }
